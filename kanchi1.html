@@ -1,0 +1,391 @@
+<html>
+
+<head>
+    <style>
+        body {
+            background-color: rgb(217, 228, 228);
+            background-size: cover;
+        }
+
+        #user,
+        #lastname,
+        #email,
+        #pass,
+        #cpass {
+            text-align: center;
+            height: 35px;
+            width: 50%;
+            /* border-radius: 30px; */
+            font-weight: bold;
+            background-color: rgb(127, 157, 196);
+
+        }
+
+        .box {
+            border: 1px solid rgb(202, 4, 169);
+            width: 500px;
+            background-color: rgb(167, 167, 163);
+            border-radius: 50px;
+        }
+
+        #saame {
+            font-size: 20px;
+            /* font-family: arial;
+                    font-weight: bold; */
+            color: rgb(146, 21, 21);
+        }
+
+        #button {
+            height: 44px;
+            color: white;
+            font-size: 23px;
+            padding: 7px;
+            background-color: rgb(139, 136, 136);
+            width: 25%;
+            /* font-weight: bold;
+                    font-family: Arial, Helvetica, sans-serif; */
+            /* border-radius: 20px; */
+        }
+
+        h1 {
+            font-size: 45px;
+            color: rgb(19, 195, 207);
+            text-shadow: 4px 4px 5px #5108b1;
+        }
+
+        #button {
+            background-color: rgb(2, 109, 25);
+            /* width: 25%; */
+            font-weight: bold;
+            /* font-family: Arial, Helvetica, sans-serif;  */
+        }
+
+        #checkbox {
+            background-color: rgb(2, 109, 25);
+            width: 25%;
+            font-weight: bold;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        #ffname,
+        #llname,
+        #eml,
+        #pas,
+        #cpas {
+            font-weight: bold;
+            color: rgb(22, 22, 20);
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="kanchi.html" onsubmit="return validation()">
+        <center>
+            <div class="box">
+
+                <h1>Login Page</h1>
+
+
+                <label for="fname" id="saame">FirstName*</label><br>
+                <input class="first_name" type="text" maxlength="15" oninput="abc(this)" onkeyup="firstname_validate()"
+                    placeholder="Please Enter your FirstName " id="user" autocomplete="off">
+                <br>
+                <span id="ffname"></span>
+                <br><br>
+
+
+
+
+
+
+                <label for="lname" id="saame">LastName*</label><br>
+                <input type="text" onkeyup="lastname_validate(this)" maxlength="15" oninput="abc(this)"
+                    placeholder="Please Enter the LastName " id="lastname" autocomplete="off">
+                <br>
+                <span id="llname"></span>
+                <br><br>
+
+
+
+
+                <label for="uname" id="saame">Email*</label><br>
+                <input type="text" onkeyup="email_validate(this)" oninput="nospc(this)" id="email"
+                    placeholder="Enter the email" autocomplete="off">
+                <br>
+                <span id="eml"></span>
+                <br><br>
+
+
+                <label for="password" id="saame">Passowrd*</label><br>
+                <input type="password" onkeyup="pasword_validation()" oninput="dilip(this)" id="pass"
+                    autocomplete="off">
+                <br>
+                <span id="pas"></span>
+                <br><br>
+
+
+                <label for="confim" id="saame">Confirm Password*</label><br>
+                <input type="Password" onkeyup="pasword_validation()" oninput="dilip(this)" id="cpass"
+                    autocomplete="off"><br>
+                <span id="cpas"></span>
+                <br><br>
+                <button id="button" type="submit">submit</button>
+                <br><br>
+
+                <br><br>
+                checkbox:<input type="checkbox" required>
+                <br><br>
+            </div>
+        </center>
+    </form>
+
+</body>
+
+
+<script>
+    let firstnameError = true;
+    let lastnameError = true;
+    let emailError = true;
+    let passwordError = true;
+
+
+
+
+    // this fun only allow this
+    function fun(input) {
+        var rgx = /[^a-zA-Z\s]/gi;
+        input.value = input.value.replace(rgx, "");
+    }
+    //first index for  not space allow
+    function spc(input) {
+        if (/^\s/.test(input.value))
+            input.value = "";
+    }
+
+
+    //for one space with middle only
+
+    function spc1(input) {
+        var r = /[\s][^a-zA-Z]/gi;
+        input.value = input.value.replace(r, "");
+    }
+    function abc(input) {
+        spc(input);
+        fun(input);
+        spc1(input);
+        pas2(input);
+
+    }
+
+
+
+
+        //phone
+
+        function p1(input){
+        var reg=/[^0-9]+\+1+\+1+\s/g;
+    }
+    function p(input){
+        var reg=/[^0-9\s]/g;
+        input.value=input.value.replace(reg,"");
+    }
+
+    function ph(input){
+        spc1(input);
+        spc(input);
+        p(input);
+    }
+
+
+    //url
+
+    function url(input) {
+        var re = /[^a-zA-Z@.://]/gi;
+        input.value = input.value.replace(re, "");
+
+    }
+
+    //email
+
+    function nospc(input) {
+        var re = /[^a-zA-Z0-9@.]/gi;
+        input.value = input.value.replace(re, "");
+
+    }
+
+
+
+    //password
+
+
+    function nospc1(input) {
+        var rex = /[\s][^a-zA-Z0-9]/gi;
+        input.value = input.value.replace(rex, "");
+
+    }
+
+
+
+    // for Password and confirm Password
+
+
+    function pas2(input) {
+        var reg = /(\w)\1{2}/gi;
+        input.value = input.value.replace(reg, "");
+    }
+    function dilip(input) {
+        nospc1(input);
+        pas2(input);
+    }
+
+
+
+    function firstname_validate() {
+        var user = document.getElementById("user").value;
+        var letters = /^[A-Z][a-zA-Z0-9]+$/;
+        if (user == "") {
+            document.getElementById("ffname").innerHTML = "* Please fill the First name ";
+            firstnameError = false;
+        } else if (user.length < 2) {
+            document.getElementById("ffname").innerHTML =
+                "* First letter must be capital";
+            firstnameError = false;
+        } else if (!letters.test(user)) {
+            document.getElementById("ffname").innerHTML =
+                "";
+            firstnameError = false;
+            return false;
+        }
+        // else if (!isNaN(user)) {
+        //     document.getElementById("ffname").innerHTML = "** Only Characters are allowed ";
+        //     firstnameError = false;
+        //   }
+        else if (/^([a-zA-Z0-9])+\+1\+1/gi.test(user)) {
+            document.getElementById("ffname").innerHTML = " Repeated character are not allowed"
+            firstnameError = false;
+            return false;
+        }
+
+        else {
+            document.getElementById("ffname").innerHTML = "";
+            firstnameError = true;
+        }
+    }
+
+
+    function lastname_validate() {
+        var lastname = document.getElementById("lastname").value;
+        var letters = /^[A-Z][a-zA-Z0-9]+$/;
+        if (lastname == "") {
+            document.getElementById("llname").innerHTML = "* Please fill the Last Name ";
+            lastnameError = false;
+        } else if (lastname.length < 2) {
+            document.getElementById("llname").innerHTML =
+                "* First letter must be capital";
+            lastnameError = false;
+        } else if (!letters.test(lastname)) {
+            document.getElementById("llname").innerHTML =
+                "Space are not allowed";
+            lastnameError = false;
+            return false;
+        }
+        //    //else if (!isNaN(lastname)) {
+        // //     document.getElementById("llname").innerHTML = "** Only Characters are allowed ";
+        // //     lastnameError = false;
+        //   }
+
+        else {
+            document.getElementById("llname").innerHTML = "";
+            lastnameError = true;
+        }
+    }
+
+
+
+
+
+
+
+    function email_validate() {
+        var email = document.getElementById("email").value;
+
+        if (email == "") {
+            document.getElementById('eml').innerHTML = "*Please fill the Email*";
+            emailError = false;
+        }
+
+        else if (/^\w+([\.-]?\w+)*@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.){1,2}[a-zA-Z]{2,3}))$/.test(email)) {
+
+            // else if (/^([\.-]?+)*@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-z\-0-9]+\.){1,2}[a-z]{2,3}))$/.test(email)) {
+
+
+            document.getElementById('eml').innerHTML = "";
+            emailError = true;
+        } else {
+            document.getElementById('eml').innerHTML = "*Invalid Email*";
+            emailError = false;
+        }
+    }
+
+
+
+
+    function pasword_validation() {
+
+
+        var passs = document.getElementById("pass").value;
+        var cpass = document.getElementById("cpass").value;
+
+        if (passs == "") {
+            document.getElementById('pas').innerHTML = "*Please Enter Password*";
+            passwordError = false;
+        }
+
+        if ((passs.length) < 5 || (passs.lenth > 20)) {
+            document.getElementById('pas').innerHTML = "*Password  must be Between 5 and 20*";
+            passwordError = false;
+        } else {
+            document.getElementById('pas').innerHTML = "";
+        }
+        if (cpass == "") {
+            document.getElementById('cpas').innerHTML = "* Please Enter the Password Again*";
+            passwordError = false;
+        }
+        if ((cpass.length) < 5 || (cpass.lenth > 20)) {
+
+            document.getElementById('cpas').innerHTML = "*Password  must be Between 5 and 20*";
+            passwordError = false;
+        } else {
+            document.getElementById('pas').innerHTML = "";
+        }
+        if (passs != cpass) {
+            document.getElementById('cpas').innerHTML = "*password must be same";
+            passwordError = false;
+        } else {
+            document.getElementById('cpas').innerHTML = "";
+            passwordError = true;
+        }
+    }
+
+    function validation() {
+        firstname_validate();
+        lastname_validate();
+        email_validate();
+        pasword_validation();
+        if (firstnameError == true && lastnameError == true && emailError == true && passwordError == true) {
+            return true;
+            alert('Thank for Submit');
+        }
+
+
+        else {
+            return false;
+
+        }
+    }
+
+
+</script>
+
+</html>
